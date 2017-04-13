@@ -1,6 +1,6 @@
 import unittest
 from mock import Mock, MagicMock, patch
-from ex_source_module import SomeClass
+#from ex_source_module import SomeClass
 import ex_source_module
 #real = SC()
 
@@ -9,7 +9,7 @@ class tasting_class(unittest.TestCase):
     # 1 -- Mock Patching Methods
     def test_mock_patch_methods(self):
         print("\n\ntest_mock_patch_methods")
-        real = SomeClass()
+        real = ex_source_module.SomeClass()
         # Mock and MagicMock are usually interchangeable
         # real.one_plus_one = MagicMock(name="one_plus_one")
         real.one_plus_one = Mock(name="one_plus_one")
@@ -20,7 +20,7 @@ class tasting_class(unittest.TestCase):
     # 2 -- Mocking an object
     def test_mocking_object_methods(self):
         print("\n\ntest_mocking_object_methods")
-        real = SomeClass()
+        real = ex_source_module.SomeClass()
         mock_twitter = Mock(name="mock_twitter")
         real.one_plus_one_tweet(mock_twitter, [1, 2])
         # mock object attribute "PostUpdate" is created on the fly upon call
@@ -74,7 +74,7 @@ class tasting_class(unittest.TestCase):
     # 6 -- Specing a mock
     def test_specing_a_mock(self):
         print("\n\ntest_specing_a_mock")
-        mock = Mock(spec=SomeClass)
+        mock = Mock(spec=ex_source_module.SomeClass)
         mock.one_plus_one([2, 3])
 
         # spec also enables argument matching and assertion
