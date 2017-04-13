@@ -37,9 +37,10 @@ class tasting_class(unittest.TestCase):
 
         with patch("ex_source_module.SomeClass") as mock:
             inst = mock.return_value
-            inst.one_plus_one.return_value = "return value"
+            inst.one_plus_one.return_value = "the result"
             res = some_function()
-            assert res == "return value"
+            print(res)
+            assert res == "the result"
             inst.one_plus_one.assert_called_with([0,2])
             print(inst.one_plus_one.mock_calls)
 
@@ -83,7 +84,15 @@ class tasting_class(unittest.TestCase):
         mock(1, 2, 3)
         mock.assert_called_with(a=1, b=2, c=3)
 
-        # to prevent 
+        # to prevent accidental setting of attributes as well as getting them, we use spec_set
+
+    # # 7 -- Patch decorators
+    @patch('ex_source_module.SomeClass.one_plus_one')
+    #def test_patch_decorators(self, one_plus_one_mock):
+    def test_patch_decorators(self, one_plus_one_mock):
+        method = one_plus_one_mock
+        method.return_value = 'return value'
+        assert method([1, 2]) == 'return value'
 
 
 
