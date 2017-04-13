@@ -1,8 +1,7 @@
 import unittest
 from mock import Mock, MagicMock, patch
-#from ex_source_module import SomeClass
 import ex_source_module
-#real = SC()
+
 
 class tasting_class(unittest.TestCase):
 
