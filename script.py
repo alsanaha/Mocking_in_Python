@@ -87,12 +87,15 @@ class tasting_class(unittest.TestCase):
         # to prevent accidental setting of attributes as well as getting them, we use spec_set
 
     # # 7 -- Patch decorators
-    @patch('ex_source_module.SomeClass.one_plus_one')
-    #def test_patch_decorators(self, one_plus_one_mock):
-    def test_patch_decorators(self, one_plus_one_mock):
-        method = one_plus_one_mock
+    @patch('ex_source_module.SomeClass')
+    def test_patch_decorators(self, mock_some_class):
+        method = mock_some_class.one_plus_one_mock
         method.return_value = 'return value'
         assert method([1, 2]) == 'return value'
+        assert method([1, 2]) == 'return value'
+        assert method.call_count ==2
+        method.assert_called_with([1,2])
+
 
 
 
