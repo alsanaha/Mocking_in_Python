@@ -1,5 +1,5 @@
 import unittest
-from mock import Mock, MagicMock, patch
+from mock import Mock, MagicMock, patch, call
 import ex_source_module
 
 
@@ -92,10 +92,14 @@ class tasting_class(unittest.TestCase):
         method = mock_some_class.one_plus_one_mock
         method.return_value = 'return value'
         assert method([1, 2]) == 'return value'
-        assert method([1, 2]) == 'return value'
-        assert method.call_count ==2
-        method.assert_called_with([1,2])
-
+        assert method([1, 3]) == 'return value'
+        assert method.call_count == 2
+        #method.assert_called_with([1, 2])
+        method.assert_called_with([1, 3])
+        first_call = method.call_args_list[0]
+        second_call = method.call_args_list[1]
+        assert first_call == call([1, 2])
+        assert second_call == call([1, 3])
 
 
 
